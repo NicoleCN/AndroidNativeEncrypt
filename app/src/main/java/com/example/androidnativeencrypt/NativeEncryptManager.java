@@ -24,7 +24,7 @@ public class NativeEncryptManager {
 
     public native String EncryptString(String string);
 
-    public static NativeEncryptManager getInstance(){
+    public static NativeEncryptManager getInstance() {
         return NativeEncryptManagerHolder.nativeEncryptManager;
     }
 
