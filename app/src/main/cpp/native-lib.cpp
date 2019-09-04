@@ -127,14 +127,17 @@ JNIEXPORT jstring JNICALL
 Java_com_example_androidnativeencrypt_NativeEncryptManager_EncryptString(JNIEnv *env,
                                                                          jobject instance,
                                                                          jstring string_) {
+    if (!is_oauth) {
+        return env->NewStringUTF(correct);
+    }
     const char *str = env->GetStringUTFChars(string_, 0);
-
-    // TODO 综合加密
+    string inStr(str);
     // 字符串首加上 BEFORE
+    inStr.insert(0, BEFORE);
     // 字符串尾巴加上AFTER
+    inStr.insert(inStr.length(), AFTER);
     // 然后BASE64
-
+    char *base64 = b64_encode(reinterpret_cast<const unsigned char *>(inStr.c_str()), inStr.length());
     env->ReleaseStringUTFChars(string_, str);
-
-    return env->NewStringUTF("");
+    return env->NewStringUTF(base64);
 }

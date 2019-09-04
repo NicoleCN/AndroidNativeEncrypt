@@ -50,6 +50,14 @@ public class JavaEncryptManager {
         return out;
     }
 
+    public String EncryptString(String mute) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("info");
+        sb.append(mute);
+        sb.append("after_");
+        return EncryptBase64(sb.toString());
+    }
+
     private static class JavaEncryptManagerHolder {
         private static JavaEncryptManager javaEncryptManager = new JavaEncryptManager();
     }
